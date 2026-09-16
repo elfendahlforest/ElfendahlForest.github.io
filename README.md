@@ -4,14 +4,14 @@ Static website for `elfendahlforest.github.io`. The site uses plain HTML, CSS, a
 
 ## Before announcing the site
 
-- Add the confirmed Airbnb listing URL in `index.html`.
-- Add the confirmed Hipcamp listing URL in `index.html`.
-- Add confirmed email and social links.
+- Confirm the Airbnb and Hipcamp listings whenever booking information changes.
+- Confirm the Instagram, TikTok, and Facebook links whenever account information changes.
+- Add a confirmed public email address if the hosts want email inquiries.
 - Replace the gallery placeholder with optimized property photos and descriptive alt text.
 - Have the property owner review the wording about stays, volunteering, animals, amenities, and location.
 - Check **Settings → Pages** and confirm deployment is set to the `main` branch at `/ (root)`.
 
-Search `index.html` for `[ADD` to locate every remaining content placeholder.
+Search `index.html` for `[ADD` to locate the remaining photo placeholder.
 
 ## Editing
 
