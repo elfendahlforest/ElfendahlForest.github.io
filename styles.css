@@ -870,13 +870,13 @@ details p {
     top: 68px;
     right: 0;
     bottom: 0; left: auto; width: min(22rem, 100%);
-    left: 0;
+
     display: none;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     padding: 1rem;
-    #e0e4e2
+    background: #e0e4e2;
   }
 
   .site-nav.open {
