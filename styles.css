@@ -163,18 +163,18 @@ p:last-child {
   background: var(--leaf);
   color: var(--woodland);
   font-family: ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.9rem;
+  color: #3f4742; font-size: 0.9rem;
 }
 
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 1.7rem;
+  gap: 1.7rem; padding: 0.45rem 0.7rem; border: 1px solid rgba(80, 88, 84, 0.22); border-radius: 999px; background: rgba(224, 228, 226, 0.92); box-shadow: 0 10px 24px rgba(13, 36, 26, 0.14);
 }
 
 .site-nav a {
   color: inherit;
-  font-size: 0.9rem;
+  color: #3f4742; font-size: 0.9rem;
   font-weight: 750;
   text-decoration: none;
 }
@@ -692,7 +692,7 @@ p:last-child {
 
 .volunteer-copy .note {
   margin-top: 1.8rem;
-  font-size: 0.9rem;
+  color: #3f4742; font-size: 0.9rem;
   font-weight: 800;
 }
 
@@ -817,7 +817,7 @@ details p {
   padding-block: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   color: rgba(250, 255, 242, 0.65);
-  font-size: 0.9rem;
+  color: #3f4742; font-size: 0.9rem;
   font-weight: 750;
   text-decoration: none;
   transition: color 160ms ease, padding 160ms ease;
