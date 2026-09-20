@@ -148,11 +148,10 @@
             </div>
           </article>
           <article class="rental-card" aria-labelledby="rental-1">
-            <div class="rental-photos" role="img" aria-label="Three photos of The Lotus Bell Tent coming soon">
-              <div class="rental-photo rental-photo-main"><span>Photos coming soon</span></div>
-              <div class="rental-photo" aria-hidden="true"></div>
-              <div class="rental-photo" aria-hidden="true"></div>
-            </div>
+            <div class="stay-slideshow" data-gallery="lotus" role="region" aria-roledescription="carousel" aria-label="Lotus Bell Tent photos">
+<button class="slide-enlarge" type="button" aria-label="Enlarge Lotus Bell Tent photo"><img class="slide-image" src="assets/codex-clipboard-60471506-bf45-4b73-84ec-ab0b1ba7a7f3.png" alt="Lotus Bell Tent bed beneath colorful drapes and clear roof windows" loading="lazy"><span class="enlarge-label">Enlarge ⛶</span></button>
+<div class="slide-controls"><button type="button" data-slide-prev aria-label="Previous photo">‹</button><button type="button" data-slide-play>Pause slideshow</button><span data-slide-count aria-live="off">1 / 4</span><button type="button" data-slide-next aria-label="Next photo">›</button></div>
+</div>
             <div class="rental-details">
               <p class="card-kicker">Elfendahl Forest</p>
               <h3 id="rental-1">The Lotus Bell Tent</h3>
@@ -161,7 +160,7 @@
             </div>
           </article>
           <article class="rental-card" aria-labelledby="rental-2">
-            <div class="stay-slideshow" role="region" aria-roledescription="carousel" aria-label="Wanderbus photos">
+            <div class="stay-slideshow" data-gallery="wanderbus" role="region" aria-roledescription="carousel" aria-label="Wanderbus photos">
               <button class="slide-enlarge" type="button" aria-label="Enlarge Wanderbus photo"><img class="slide-image" src="assets/codex-clipboard-5fc858ab-fe1a-41f2-9202-215ff28ae8c3.png" alt="Wanderbus exterior with cedar shingles and a garden gate among forest trees" loading="lazy"><span class="enlarge-label">Enlarge ⛶</span></button>
               <div class="slide-controls">
                 <button type="button" data-slide-prev aria-label="Previous photo">‹</button>
@@ -341,41 +340,57 @@
   </dialog>
   <script>
   (() => {
-    const photos = [{"src":"assets/codex-clipboard-5fc858ab-fe1a-41f2-9202-215ff28ae8c3.png","alt":"Wanderbus exterior with cedar shingles and a garden gate among forest trees"},{"src":"assets/codex-clipboard-0196b653-9189-4499-a111-07faeb5f4340.png","alt":"Wanderbus interior with a teal bed, seating, and wooden kitchenette"},{"src":"assets/codex-clipboard-4001c236-5baa-4993-bf75-a362442d71b7.png","alt":"Wanderbus interior looking toward the driver’s area beneath a patterned metal ceiling"},{"src":"assets/codex-clipboard-d0590fdb-ace9-4c69-9e91-6b4dadc1d6a9.png","alt":"Wanderbus at night with string lights and outdoor seating"}];
-    const carousel = document.querySelector('.stay-slideshow');
-    const image = carousel.querySelector('.slide-image');
-    const play = carousel.querySelector('[data-slide-play]');
-    const count = carousel.querySelector('[data-slide-count]');
-    const enlarge = carousel.querySelector('.slide-enlarge');
+    const galleries = {"lotus":[{"src":"assets/codex-clipboard-60471506-bf45-4b73-84ec-ab0b1ba7a7f3.png","alt":"Lotus Bell Tent bed beneath colorful drapes and clear roof windows"},{"src":"assets/codex-clipboard-733087bf-ac86-4e15-9a3c-c809eb9fbe6e.png","alt":"White Lotus Bell Tent surrounded by forest with outdoor seating"},{"src":"assets/codex-clipboard-f990cf91-f96f-49b9-9b7e-47e7766c20d8.png","alt":"Spacious Lotus Bell Tent interior with patterned rug and seating"},{"src":"assets/codex-clipboard-7d864f63-18e1-4ed4-9c9f-415769c71743.png","alt":"Lotus Bell Tent at dusk beside glowing string lights"}],"wanderbus":[{"src":"assets/codex-clipboard-5fc858ab-fe1a-41f2-9202-215ff28ae8c3.png","alt":"Wanderbus exterior with cedar shingles and a garden gate among forest trees"},{"src":"assets/codex-clipboard-0196b653-9189-4499-a111-07faeb5f4340.png","alt":"Wanderbus interior with a teal bed, seating, and wooden kitchenette"},{"src":"assets/codex-clipboard-4001c236-5baa-4993-bf75-a362442d71b7.png","alt":"Wanderbus interior looking toward the driver’s area beneath a patterned metal ceiling"},{"src":"assets/codex-clipboard-d0590fdb-ace9-4c69-9e91-6b4dadc1d6a9.png","alt":"Wanderbus at night with string lights and outdoor seating"}]};
     const dialog = document.querySelector('.photo-dialog');
     const big = dialog.querySelector('img');
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let index = 0, paused = reduced.matches, timer;
-    function render() {
-      image.src = photos[index].src; image.alt = photos[index].alt;
-      big.src = photos[index].src; big.alt = photos[index].alt;
-      count.textContent = (index + 1) + ' / ' + photos.length;
-      dialog.querySelector('[data-photo-count]').textContent = count.textContent;
-      play.textContent = paused ? 'Play slideshow' : 'Pause slideshow';
-    }
-    function schedule() {
-      clearInterval(timer);
-      if (!paused && !dialog.open && !document.hidden) timer = setInterval(() => { index = (index + 1) % photos.length; render(); }, 5000);
-    }
-    function step(delta) { paused = true; index = (index + delta + photos.length) % photos.length; render(); schedule(); }
-    carousel.querySelector('[data-slide-prev]').addEventListener('click', () => step(-1));
-    carousel.querySelector('[data-slide-next]').addEventListener('click', () => step(1));
-    play.addEventListener('click', () => { paused = !paused; render(); schedule(); });
-    enlarge.addEventListener('click', () => { paused = true; render(); dialog.showModal(); schedule(); });
+    const controllers = [];
+    let active;
+    document.querySelectorAll('.stay-slideshow[data-gallery]').forEach(carousel => {
+      const photos = galleries[carousel.dataset.gallery];
+      if (!photos || !photos.length) return;
+      const image = carousel.querySelector('.slide-image');
+      const play = carousel.querySelector('[data-slide-play]');
+      const count = carousel.querySelector('[data-slide-count]');
+      const enlarge = carousel.querySelector('.slide-enlarge');
+      let index = 0, paused = reduced.matches, timer;
+      function render() {
+        image.src = photos[index].src; image.alt = photos[index].alt;
+        count.textContent = (index + 1) + ' / ' + photos.length;
+        play.textContent = paused ? 'Play slideshow' : 'Pause slideshow';
+        if (active === controller) {
+          big.src = photos[index].src; big.alt = photos[index].alt;
+          dialog.querySelector('[data-photo-count]').textContent = count.textContent;
+        }
+      }
+      function schedule() {
+        clearInterval(timer);
+        if (!paused && !dialog.open && !document.hidden) timer = setInterval(() => { index = (index + 1) % photos.length; render(); }, 5000);
+      }
+      function step(delta) { paused = true; index = (index + delta + photos.length) % photos.length; render(); schedule(); }
+      const controller = { render, schedule, step, enlarge };
+      controllers.push(controller);
+      carousel.querySelector('[data-slide-prev]').addEventListener('click', () => step(-1));
+      carousel.querySelector('[data-slide-next]').addEventListener('click', () => step(1));
+      play.addEventListener('click', () => { paused = !paused; render(); schedule(); });
+      enlarge.addEventListener('click', () => {
+        paused = true; active = controller; render();
+        dialog.setAttribute('aria-label', 'Enlarged ' + carousel.getAttribute('aria-label'));
+        dialog.showModal(); controllers.forEach(item => item.schedule());
+      });
+      reduced.addEventListener('change', () => { if (reduced.matches) { paused = true; render(); schedule(); } });
+      render(); schedule();
+    });
     dialog.querySelector('[data-photo-close]').addEventListener('click', () => dialog.close());
-    dialog.querySelector('[data-photo-prev]').addEventListener('click', () => step(-1));
-    dialog.querySelector('[data-photo-next]').addEventListener('click', () => step(1));
-    dialog.addEventListener('close', () => { enlarge.focus(); schedule(); });
-    dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
-    dialog.addEventListener('keydown', e => { if(e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } if(e.key === 'ArrowRight') { e.preventDefault(); step(1); } });
-    document.addEventListener('visibilitychange', schedule);
-    reduced.addEventListener('change', () => { if(reduced.matches) { paused = true; render(); schedule(); } });
-    render(); schedule();
+    dialog.querySelector('[data-photo-prev]').addEventListener('click', () => active?.step(-1));
+    dialog.querySelector('[data-photo-next]').addEventListener('click', () => active?.step(1));
+    dialog.addEventListener('close', () => { active?.enlarge.focus(); controllers.forEach(item => item.schedule()); });
+    dialog.addEventListener('click', e => { if(e.target === dialog) dialog.close(); });
+    dialog.addEventListener('keydown', e => {
+      if(e.key === 'ArrowLeft') { e.preventDefault(); active?.step(-1); }
+      if(e.key === 'ArrowRight') { e.preventDefault(); active?.step(1); }
+    });
+    document.addEventListener('visibilitychange', () => controllers.forEach(item => item.schedule()));
   })();
   </script>
 
