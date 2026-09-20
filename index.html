@@ -35,6 +35,18 @@
     .wanderbus-night img { display: block; width: 100%; height: 100px; object-fit: cover; object-position: center 55%; }
     .wanderbus-night > span { display: block; font-size: .75rem; color: var(--muted); margin-top: .25rem; }
     .rental-photos a:focus-visible, .wanderbus-night a:focus-visible { outline: 3px solid var(--forest); outline-offset: 2px; }
+  
+    .stay-slideshow { margin: 12px; border-radius: 10px; overflow: hidden; background: #183a2a; }
+    .slide-enlarge { display: block; position: relative; width: 100%; padding: 0; border: 0; background: #102c20; cursor: zoom-in; }
+    .slide-image { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; display: block; }
+    .enlarge-label { position: absolute; bottom: 10px; right: 10px; background: #fafafa; color: #183a2a; padding: .3rem .7rem; border-radius: 6px; font-size: .8rem; }
+    .slide-controls { display: flex; align-items: center; justify-content: space-between; gap: .4rem; padding: .5rem; color: #fafafa; font-size: .85rem; }
+    .slide-controls button, .photo-dialog button { min-height: 44px; min-width: 44px; border: 0; border-radius: 6px; background: #fafafa; color: #183a2a; cursor: pointer; font: inherit; padding: .5rem; }
+    .stay-slideshow button:focus-visible, .photo-dialog button:focus-visible { outline: 3px solid #b7d93d; outline-offset: -3px; }
+    .photo-dialog { width: min(1100px, 96vw); max-height: 96dvh; padding: 12px; border: 0; border-radius: 12px; background: #102c20; color: #fafafa; }
+    .photo-dialog::backdrop { background: rgba(0,0,0,.85); }
+    .photo-dialog img { display: block; width: 100%; height: min(72dvh, 800px); object-fit: contain; }
+    .photo-dialog-bar { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
   </style>
 </head>
 <body>
@@ -149,12 +161,15 @@
             </div>
           </article>
           <article class="rental-card" aria-labelledby="rental-2">
-            <div class="rental-photos wanderbus-photos" aria-label="Wanderbus photos">
-              <a class="rental-photo rental-photo-main" href="assets/codex-clipboard-5fc858ab-fe1a-41f2-9202-215ff28ae8c3.png" target="_blank" rel="noopener noreferrer"><img src="assets/codex-clipboard-5fc858ab-fe1a-41f2-9202-215ff28ae8c3.png" alt="Wanderbus exterior with cedar shingles and a garden gate among forest trees" loading="lazy" decoding="async"></a>
-              <a class="rental-photo" href="assets/codex-clipboard-0196b653-9189-4499-a111-07faeb5f4340.png" target="_blank" rel="noopener noreferrer"><img src="assets/codex-clipboard-0196b653-9189-4499-a111-07faeb5f4340.png" alt="Wanderbus interior with a teal bed, seating, and wooden kitchenette" loading="lazy" decoding="async"></a>
-              <a class="rental-photo" href="assets/codex-clipboard-4001c236-5baa-4993-bf75-a362442d71b7.png" target="_blank" rel="noopener noreferrer"><img src="assets/codex-clipboard-4001c236-5baa-4993-bf75-a362442d71b7.png" alt="Wanderbus interior looking toward the driver’s area beneath a patterned metal ceiling" loading="lazy" decoding="async"></a>
+            <div class="stay-slideshow" role="region" aria-roledescription="carousel" aria-label="Wanderbus photos">
+              <button class="slide-enlarge" type="button" aria-label="Enlarge Wanderbus photo"><img class="slide-image" src="assets/codex-clipboard-5fc858ab-fe1a-41f2-9202-215ff28ae8c3.png" alt="Wanderbus exterior with cedar shingles and a garden gate among forest trees" loading="lazy"><span class="enlarge-label">Enlarge ⛶</span></button>
+              <div class="slide-controls">
+                <button type="button" data-slide-prev aria-label="Previous photo">‹</button>
+                <button type="button" data-slide-play>Pause slideshow</button>
+                <span data-slide-count aria-live="off">1 / 4</span>
+                <button type="button" data-slide-next aria-label="Next photo">›</button>
+              </div>
             </div>
-            <div class="wanderbus-night"><a class="rental-photo" href="assets/codex-clipboard-d0590fdb-ace9-4c69-9e91-6b4dadc1d6a9.png" target="_blank" rel="noopener noreferrer"><img src="assets/codex-clipboard-d0590fdb-ace9-4c69-9e91-6b4dadc1d6a9.png" alt="Wanderbus at night with string lights and outdoor seating" loading="lazy" decoding="async"></a><span>The Wanderbus after dark</span></div>
             <div class="rental-details">
               <p class="card-kicker">Elfendahl Forest</p>
               <h3 id="rental-2">The Wanderbus</h3>
@@ -319,5 +334,50 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <dialog class="photo-dialog" aria-label="Enlarged Wanderbus photos">
+    <div class="photo-dialog-bar"><button type="button" data-photo-close>Close ✕</button><span data-photo-count aria-live="polite"></span><div><button type="button" data-photo-prev aria-label="Previous photo">‹</button> <button type="button" data-photo-next aria-label="Next photo">›</button></div></div>
+    <img alt="">
+  </dialog>
+  <script>
+  (() => {
+    const photos = [{"src":"assets/codex-clipboard-5fc858ab-fe1a-41f2-9202-215ff28ae8c3.png","alt":"Wanderbus exterior with cedar shingles and a garden gate among forest trees"},{"src":"assets/codex-clipboard-0196b653-9189-4499-a111-07faeb5f4340.png","alt":"Wanderbus interior with a teal bed, seating, and wooden kitchenette"},{"src":"assets/codex-clipboard-4001c236-5baa-4993-bf75-a362442d71b7.png","alt":"Wanderbus interior looking toward the driver’s area beneath a patterned metal ceiling"},{"src":"assets/codex-clipboard-d0590fdb-ace9-4c69-9e91-6b4dadc1d6a9.png","alt":"Wanderbus at night with string lights and outdoor seating"}];
+    const carousel = document.querySelector('.stay-slideshow');
+    const image = carousel.querySelector('.slide-image');
+    const play = carousel.querySelector('[data-slide-play]');
+    const count = carousel.querySelector('[data-slide-count]');
+    const enlarge = carousel.querySelector('.slide-enlarge');
+    const dialog = document.querySelector('.photo-dialog');
+    const big = dialog.querySelector('img');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let index = 0, paused = reduced.matches, timer;
+    function render() {
+      image.src = photos[index].src; image.alt = photos[index].alt;
+      big.src = photos[index].src; big.alt = photos[index].alt;
+      count.textContent = (index + 1) + ' / ' + photos.length;
+      dialog.querySelector('[data-photo-count]').textContent = count.textContent;
+      play.textContent = paused ? 'Play slideshow' : 'Pause slideshow';
+    }
+    function schedule() {
+      clearInterval(timer);
+      if (!paused && !dialog.open && !document.hidden) timer = setInterval(() => { index = (index + 1) % photos.length; render(); }, 5000);
+    }
+    function step(delta) { paused = true; index = (index + delta + photos.length) % photos.length; render(); schedule(); }
+    carousel.querySelector('[data-slide-prev]').addEventListener('click', () => step(-1));
+    carousel.querySelector('[data-slide-next]').addEventListener('click', () => step(1));
+    play.addEventListener('click', () => { paused = !paused; render(); schedule(); });
+    enlarge.addEventListener('click', () => { paused = true; render(); dialog.showModal(); schedule(); });
+    dialog.querySelector('[data-photo-close]').addEventListener('click', () => dialog.close());
+    dialog.querySelector('[data-photo-prev]').addEventListener('click', () => step(-1));
+    dialog.querySelector('[data-photo-next]').addEventListener('click', () => step(1));
+    dialog.addEventListener('close', () => { enlarge.focus(); schedule(); });
+    dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+    dialog.addEventListener('keydown', e => { if(e.key === 'ArrowLeft') { e.preventDefault(); step(-1); } if(e.key === 'ArrowRight') { e.preventDefault(); step(1); } });
+    document.addEventListener('visibilitychange', schedule);
+    reduced.addEventListener('change', () => { if(reduced.matches) { paused = true; render(); schedule(); } });
+    render(); schedule();
+  })();
+  </script>
+
 </body>
 </html>
