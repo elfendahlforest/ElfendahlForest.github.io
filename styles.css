@@ -984,3 +984,35 @@ details p {
     transition-duration: 0.01ms !important;
   }
 }
+/* Keep every navigation link inside an opaque, readable panel. */
+.site-nav {
+  background: #fafafa;
+}
+.site-nav a {
+  color: #383838;
+}
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: #183a2a;
+  background: #e8e8e8;
+}
+@media (max-width: 860px) {
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    width: min(22rem, 100vw);
+    height: auto;
+    max-height: calc(100dvh - 68px);
+    overflow-y: auto;
+    border-radius: 0 0 0 1rem;
+    background: #fafafa;
+    text-align: right;
+  }
+  .site-nav a {
+    flex-shrink: 0;
+    border-bottom-color: #dedede;
+  }
+}
