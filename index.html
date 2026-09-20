@@ -8,6 +8,27 @@
   <title>Elfendahl Forest | Sustainable Woodland Community</title>
   <link rel="icon" href="assets/leaf.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=490e7a8">
+  <style>
+    .rental-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+    .rental-card { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--warm-white); display: flex; flex-direction: column; }
+    .rental-photos { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: repeat(2, 110px); gap: 6px; padding: 12px; }
+    .rental-photo { background: #dce3d5; border-radius: 8px; }
+    .rental-photo-main { grid-row: span 2; display: grid; place-items: center; background: #e6eade; color: #53634b; font-size: .85rem; }
+    .rental-details { padding: 1.5rem 2rem 2rem; flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
+    .rental-details h3 { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+    .rental-details > p:not(.card-kicker) { color: var(--muted); }
+    .host-feature { margin-top: 2rem; padding: clamp(1.5rem, 4vw, 3rem); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2rem; background: var(--warm-white); border: 1px solid var(--line); border-radius: var(--radius); }
+    .host-feature h3 { font-size: 2rem; }
+    .host-rating { text-align: center; white-space: nowrap; }
+    .host-rating > span { color: #687d26; font-size: 1.8rem; }
+    .host-rating strong { font-size: 2.5rem; }
+    .host-rating strong span { font-size: 1rem; font-weight: 500; }
+    .host-rating p { margin: 0; font-weight: 750; }
+    .host-rating small { color: var(--muted); }
+    .hipcamp-option { margin-top: 2rem; text-align: center; }
+    @media (max-width: 860px) { .rental-grid, .host-feature { grid-template-columns: 1fr; } .host-rating { text-align: left; } }
+    @media (max-width: 400px) { .rental-details { padding: 1.25rem; } .rental-photos { grid-template-rows: repeat(2, 85px); } }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -90,25 +111,73 @@
       <div class="wrap">
         <div class="section-heading">
           <p class="eyebrow">Stay with us</p>
-          <h2 id="stay-title">Choose the booking site that works for you.</h2>
-          <p>Reservations remain on established booking platforms so availability, pricing, policies, and messages stay together in one place.</p>
+          <h2 id="stay-title">Find your spot in the forest.</h2>
+          <p>Choose a campsite, a bell tent, a bus, or a gathering with your whole group. Explore each stay on Airbnb for availability, amenities, and booking details.</p>
         </div>
-        <div class="booking-grid">
-          <article class="booking-card airbnb-card">
-            <div class="card-icon" aria-hidden="true">⌂</div>
-            <p class="card-kicker">Book through</p>
-            <h3>Airbnb</h3>
-            <p>View the Airbnb listing for current availability, stay details, and booking information.</p>
-            <a class="button button-dark" href="https://www.airbnb.com/rooms/1641516033585098492" target="_blank" rel="noopener noreferrer">View the Airbnb listing <span aria-hidden="true">↗</span></a>
+        <div class="rental-grid">
+          <article class="rental-card" aria-labelledby="rental-0">
+            <div class="rental-photos" role="img" aria-label="Three photos of The Shire coming soon">
+              <div class="rental-photo rental-photo-main"><span>Photos coming soon</span></div>
+              <div class="rental-photo" aria-hidden="true"></div>
+              <div class="rental-photo" aria-hidden="true"></div>
+            </div>
+            <div class="rental-details">
+              <p class="card-kicker">Elfendahl Forest</p>
+              <h3 id="rental-0">The Shire</h3>
+              <p>A campsite in Elfendahl Forest. Bring your plans for a little time in the woods.</p>
+              <a class="button button-dark" href="https://www.airbnb.com/rooms/51223619" target="_blank" rel="noopener noreferrer" aria-label="View The Shire on Airbnb">View on Airbnb <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
-          <article class="booking-card hipcamp-card">
-            <div class="card-icon" aria-hidden="true">△</div>
-            <p class="card-kicker">Book through</p>
-            <h3>Hipcamp</h3>
-            <p>View the Hipcamp listing for campsite options, current availability, and booking information.</p>
-            <a class="button button-dark" href="https://www.hipcamp.com/en-US/land/washington-elfendahl-forest-j29h5ojm" target="_blank" rel="noopener noreferrer">Explore stays on Hipcamp <span aria-hidden="true">↗</span></a>
+          <article class="rental-card" aria-labelledby="rental-1">
+            <div class="rental-photos" role="img" aria-label="Three photos of The Lotus Bell Tent coming soon">
+              <div class="rental-photo rental-photo-main"><span>Photos coming soon</span></div>
+              <div class="rental-photo" aria-hidden="true"></div>
+              <div class="rental-photo" aria-hidden="true"></div>
+            </div>
+            <div class="rental-details">
+              <p class="card-kicker">Elfendahl Forest</p>
+              <h3 id="rental-1">The Lotus Bell Tent</h3>
+              <p>A bell tent stay for a glamping getaway in the forest.</p>
+              <a class="button button-dark" href="https://www.airbnb.com/rooms/50938867" target="_blank" rel="noopener noreferrer" aria-label="View The Lotus Bell Tent on Airbnb">View on Airbnb <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="rental-card" aria-labelledby="rental-2">
+            <div class="rental-photos" role="img" aria-label="Three photos of The Wanderbus coming soon">
+              <div class="rental-photo rental-photo-main"><span>Photos coming soon</span></div>
+              <div class="rental-photo" aria-hidden="true"></div>
+              <div class="rental-photo" aria-hidden="true"></div>
+            </div>
+            <div class="rental-details">
+              <p class="card-kicker">Elfendahl Forest</p>
+              <h3 id="rental-2">The Wanderbus</h3>
+              <p>Make the Wanderbus your home base for a stay at Elfendahl Forest.</p>
+              <a class="button button-dark" href="https://www.airbnb.com/rooms/630554053102713398" target="_blank" rel="noopener noreferrer" aria-label="View The Wanderbus on Airbnb">View on Airbnb <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="rental-card" aria-labelledby="rental-3">
+            <div class="rental-photos" role="img" aria-label="Three photos of The Whole Place coming soon">
+              <div class="rental-photo rental-photo-main"><span>Photos coming soon</span></div>
+              <div class="rental-photo" aria-hidden="true"></div>
+              <div class="rental-photo" aria-hidden="true"></div>
+            </div>
+            <div class="rental-details">
+              <p class="card-kicker">Elfendahl Forest</p>
+              <h3 id="rental-3">The Whole Place</h3>
+              <p>Bring your group: four camping spots, with room to set up more tents for extra guests. Confirm guest numbers and arrangements with Gary when booking.</p>
+              <a class="button button-dark" href="https://www.airbnb.com/rooms/1641516033585098492" target="_blank" rel="noopener noreferrer" aria-label="View The Whole Place on Airbnb">View on Airbnb <span aria-hidden="true">↗</span></a>
+            </div>
           </article>
         </div>
+        <aside class="host-feature" aria-labelledby="host-title">
+          <div>
+            <p class="eyebrow">Meet your host · Airbnb</p>
+            <h3 id="host-title">Gary welcomes you to the forest.</h3>
+            <p>Get to know Gary and take a peek at what guests say, straight from their reviews on Airbnb.</p>
+            <a class="text-link" href="https://www.airbnb.com/users/profile/1462706024086641784" target="_blank" rel="noopener noreferrer">Meet Gary &amp; read his Airbnb reviews ↗</a>
+          </div>
+          <div class="host-rating"><span aria-hidden="true">★</span> <strong>4.91<span> / 5</span></strong><p>Host rating on Airbnb</p><small>As of September 20, 2026</small></div>
+        </aside>
+        <p class="hipcamp-option">Prefer Hipcamp? <a class="text-link" href="https://www.hipcamp.com/en-US/land/washington-elfendahl-forest-j29h5ojm" target="_blank" rel="noopener noreferrer">Explore Elfendahl Forest on Hipcamp ↗</a></p>
       </div>
     </section>
 
@@ -197,7 +266,7 @@
           </details>
           <details>
             <summary>How do I reserve a campsite?</summary>
-            <p>Use the Airbnb or Hipcamp listing once the booking links above are added. Elfendahl Forest does not operate a separate reservation system on this website.</p>
+            <p>Choose a rental above to book through Airbnb, or explore the Hipcamp listing. Elfendahl Forest does not operate a separate reservation system on this website.</p>
           </details>
           <details>
             <summary>What should I expect?</summary>
