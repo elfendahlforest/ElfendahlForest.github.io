@@ -49,6 +49,12 @@
     .photo-dialog-bar { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
     #gallery .stay-slideshow { margin: 0; }
     #gallery .slide-image { height: min(65vh, 650px); aspect-ratio: auto; }
+    .hero .button-row { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .hero-socials { display: flex; align-items: center; gap: .65rem; flex-shrink: 0; }
+    .hero-socials a { display: grid; place-items: center; width: 44px; height: 44px; color: #fafff2; border: 1px solid rgba(250,255,242,.5); border-radius: 50%; }
+    .hero-socials svg { width: 23px; height: 23px; fill: currentColor; }
+    .hero-socials a:hover { background: #fafff2; color: #183a2a; }
+    .hero-socials a:focus-visible { outline: 3px solid #b7d93d; outline-offset: 4px; }
   </style>
 </head>
 <body>
@@ -91,6 +97,11 @@
         <div class="button-row">
           <a class="button button-primary" href="#stay">Find a place to stay</a>
           <a class="button button-secondary" href="#volunteer">Learn about volunteering</a>
+          <div class="hero-socials" aria-label="Follow Elfendahl Forest">
+            <a href="https://www.facebook.com/profile.php?id=100070444536271" target="_blank" rel="noopener noreferrer" aria-label="Elfendahl Forest on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047v-2.66c0-3.026 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971h-1.513c-1.491 0-1.956.931-1.956 1.887v2.263h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+            <a href="https://www.instagram.com/buccellicook" target="_blank" rel="noopener noreferrer" aria-label="Elfendahl Forest on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg></a>
+            <a href="https://www.tiktok.com/@elfendahlforest_pnw" target="_blank" rel="noopener noreferrer" aria-label="Elfendahl Forest on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 0h-4.1v16.4a3.5 3.5 0 1 1-3-3.46V8.8a7.6 7.6 0 1 0 7.1 7.6V8.1a10.1 10.1 0 0 0 5.9 1.9V5.9A6 6 0 0 1 16.6 0z"/></svg></a>
+          </div>
         </div>
       </div>
     </section>
@@ -305,12 +316,10 @@
         <div>
           <p class="eyebrow">Keep in touch</p>
           <h2 id="contact-title">Questions before you head into the woods?</h2>
-          <p>Follow life around the forest, or use the messaging tools on Airbnb and Hipcamp for questions about a stay.</p>
+          <p>Message the host through Airbnb or Hipcamp with any questions about staying, volunteering, or longer-term stays.</p>
         </div>
-        <div class="contact-links" aria-label="Elfendahl Forest links">
-          <a href="https://www.instagram.com/buccellicook?stkn=MTJuZWNlMmw2eWkzZw%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer"><span>Instagram</span><span aria-hidden="true">↗</span></a>
-          <a href="https://www.tiktok.com/@elfendahlforest_pnw?_r=1&amp;_t=ZP-99d5jlfB6C7" target="_blank" rel="noopener noreferrer"><span>TikTok</span><span aria-hidden="true">↗</span></a>
-          <a href="https://www.facebook.com/profile.php?id=100070444536271" target="_blank" rel="noopener noreferrer"><span>Facebook</span><span aria-hidden="true">↗</span></a>
+        <div class="contact-links" aria-label="Message the host">
+          <a href="https://www.airbnb.com/users/profile/1462706024086641784" target="_blank" rel="noopener noreferrer"><span>Message through Airbnb</span><span aria-hidden="true">↗</span></a>
           <a href="https://www.hipcamp.com/en-US/land/washington-elfendahl-forest-j29h5ojm" target="_blank" rel="noopener noreferrer"><span>Message through Hipcamp</span><span aria-hidden="true">↗</span></a>
         </div>
       </div>
